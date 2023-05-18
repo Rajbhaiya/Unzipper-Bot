@@ -23,15 +23,16 @@ def check_log_channel():
             c_info = unzip_client.get_chat(chat_id=Config.LOGS_CHANNEL)
             if c_info.type != enums.ChatType.CHANNEL:
                 logging.warn("Chat is not a channel!")
-                pass
+                exit()
             elif c_info.username is not None:
                 logging.warn("Channel is not private!")
-                pass
+                exit()
             else:
                 unzip_client.send_message(
                     chat_id=Config.LOGS_CHANNEL, text="`Unzipper-Bot has Successfully Started!` \n\n**Powered by @NexaBotsUpdates**")
         else:
             logging.warn("No Log Channel ID is Given! Imma leaving Now!")
-            pass
+            exit()
     except Exception as e:
-        pass
+        logging.warn("Error Happend while checking Log Channel! Make sure you're not dumb enough to provide a wrong Log Channel ID!")
+        logging.warn(f"Error: \n{e}")
